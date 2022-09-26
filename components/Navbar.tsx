@@ -7,7 +7,7 @@ export default function Navbar() {
 
   return (
     <nav className="flex justify-between bg-black text-white h-12 items-center px-8 mb-4">
-      <div>Logos</div>
+      <Link href="/">Logos</Link>
       <div className="flex gap-4">
         {session?.user ? (
           <>
