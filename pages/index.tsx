@@ -1,7 +1,10 @@
 import type { NextPage } from "next";
+import { signIn, useSession } from "next-auth/react";
 
 const Home: NextPage = () => {
-  return <div className="text-red-600">Hello World</div>;
+  const { data: session } = useSession();
+
+  return <div>Homepage</div>;
 };
 
 export default Home;
