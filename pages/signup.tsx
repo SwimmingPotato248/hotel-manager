@@ -3,6 +3,7 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
 import axios from "axios";
+import { signIn } from "next-auth/react";
 
 const schema = z.object({
   username: z
@@ -33,8 +34,8 @@ export default function SignUp() {
 
   async function onSubmit(data: any) {
     try {
-      const res = await axios.post("api/users/create", data);
-      console.log(res);
+      await axios.post("api/users/create", data);
+      signIn();
     } catch (e) {
       console.log(e);
     }

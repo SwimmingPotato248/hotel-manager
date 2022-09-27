@@ -23,7 +23,9 @@ export default function Rooms({ rooms }: any) {
               <div>Price: {room.price}</div>
               <div>Status: {room.status}</div>
               {room.status === "AVAILABLE" && (
-                <Link href={`/booking?roomId=${room.id}`}>
+                <Link
+                  href={`/bookings?roomId=${room.id}&roomName=${room.name}`}
+                >
                   <div className="bg-blue-400 text-center rounded-md cursor-pointer">
                     Book this room
                   </div>
