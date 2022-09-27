@@ -1,5 +1,6 @@
 import { GetServerSideProps, NextPage } from "next";
 import prisma from "../../../lib/prisma";
+import { Status } from "@prisma/client";
 
 type Room = {
   room: {
@@ -11,26 +12,49 @@ type Room = {
 };
 
 const EditRoom: NextPage<Room> = ({ room }) => {
+  function enumKeys<E>(e: E): (keyof E)[] {
+    return Object.keys(e) as (keyof E)[];
+  }
+
   return (
-    <form
-      className="flex flex-col gap-2 mx-auto max-w-xl"
-      method="POST"
-      action="/api/rooms/edit"
-    >
-      <input type="hidden" name="id" value={room.id} />
-      <input type="text" name="name" defaultValue={room.name} />
-      <input type="number" name="price" defaultValue={room.price} />
-      <select name="status">
-        <option value="AVAILABLE">Available</option>
-        <option value="NOT_AVAILABLE">Not Available</option>
-        <option value="MAINTENANCE">Maintenance</option>
-      </select>
-      <input
-        type="submit"
-        value="Edit this room"
-        className="bg-blue-400 rounded-md py-2 cursor-pointer"
-      />
-    </form>
+    <>
+      <form
+        className="flex flex-col gap-2 mx-auto max-w-xl"
+        method="POST"
+        action="/api/rooms/edit"
+      >
+        <input type="hidden" name="id" value={room.id} />
+        <input type="text" name="name" defaultValue={room.name} />
+        <input type="number" name="price" defaultValue={room.price} />
+        <select name="status">
+          {enumKeys(Status).map(status => {
+            return (
+              <option key={status} value={status}>
+                {status}
+              </option>
+            );
+          })}
+        </select>
+        <input
+          type="submit"
+          value="Edit this room"
+          className="bg-blue-400 rounded-md py-2 cursor-pointer"
+        />
+      </form>
+      <div className="mx-auto text-center my-4">-Or-</div>
+      <form
+        className="flex flex-col gap-2 mx-auto max-w-xl"
+        method="POST"
+        action="/api/rooms/delete"
+      >
+        <input type="hidden" name="id" value={room.id} />
+        <input
+          type="submit"
+          value="Delete this room"
+          className="bg-blue-400 rounded-md py-2 cursor-pointer"
+        />
+      </form>
+    </>
   );
 };
 
