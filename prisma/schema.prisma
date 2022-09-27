@@ -15,7 +15,8 @@ model User {
   username String @unique
   password String
 
-  profile Profile?
+  profile  Profile?
+  bookings Booking[]
 }
 
 model Profile {
@@ -30,14 +31,30 @@ model Profile {
 }
 
 model Room {
-  id     Int    @id @default(autoincrement())
-  name   String
-  price  Float
-  status Status @default(AVAILABLE)
+  id       Int       @id @default(autoincrement())
+  name     String
+  price    Float
+  status   Status    @default(AVAILABLE)
+  bookings Booking[]
 }
 
 enum Status {
   AVAILABLE
   NOT_AVAILABLE
-  MAINTAINANCE
+  MAINTENANCE
+}
+
+model Booking {
+  id   Int  @id @default(autoincrement())
+  room Room @relation(fields: [roomId], references: [id])
+  user User @relation(fields: [userId], references: [id])
+
+  customer_name String
+  start_date    DateTime
+  end_date      DateTime
+  total_cost    Float
+  roomId        Int
+  userId        Int
+
+  createdAt DateTime @default(now())
 }

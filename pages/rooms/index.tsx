@@ -15,10 +15,25 @@ export default function Rooms({ rooms }: any) {
       <div className="grid grid-cols-2 gap-2">
         {rooms.map((room: any) => {
           return (
-            <div key={room.id} className="bg-slate-300 rounded-lg p-4">
+            <div
+              key={room.id}
+              className="bg-slate-300 rounded-lg p-4 flex flex-col gap-2"
+            >
               <div>Room name: {room.name}</div>
               <div>Price: {room.price}</div>
               <div>Status: {room.status}</div>
+              {room.status === "AVAILABLE" && (
+                <Link href={`/booking?roomId=${room.id}`}>
+                  <div className="bg-blue-400 text-center rounded-md cursor-pointer">
+                    Book this room
+                  </div>
+                </Link>
+              )}
+              <Link href={`/rooms/${room.id}/edit`}>
+                <div className="bg-blue-400 text-center rounded-md cursor-pointer">
+                  Edit this room
+                </div>
+              </Link>
             </div>
           );
         })}
