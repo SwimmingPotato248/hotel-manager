@@ -1,4 +1,5 @@
 import axios from "axios";
+import { useRouter } from "next/router";
 import React from "react";
 import { useForm } from "react-hook-form";
 
@@ -8,6 +9,7 @@ export default function CreateRoom() {
     handleSubmit,
     formState: { errors },
   } = useForm();
+  const router = useRouter();
 
   async function onSubmit(data: any) {
     console.log(data);
@@ -16,7 +18,7 @@ export default function CreateRoom() {
         `${window.location.origin}/api/rooms/create`,
         data
       );
-      console.log(res);
+      router.push("/rooms");
     } catch (e) {
       console.log(e);
     }
@@ -41,7 +43,11 @@ export default function CreateRoom() {
         step="0.01"
         min="0"
       />
-      <input type="submit" value="Submit" />
+      <input
+        type="submit"
+        value="Submit"
+        className="bg-blue-400 rounded-lg py-2 cursor-pointer"
+      />
     </form>
   );
 }
