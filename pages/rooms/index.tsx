@@ -9,7 +9,7 @@ export default function Rooms({ rooms }: any) {
     <div className="mx-auto max-w-2xl">
       <div className="text-center">Rooms</div>
       <Link href="/rooms/create">
-        <button className="w-full bg-blue-500 my-4 py-2 rounded-xl">
+        <button className="w-full bg-blue-500 my-4 py-2 rounded-xl shadow-md shadow-black focus:shadow-sm">
           Add new room
         </button>
       </Link>
@@ -18,7 +18,7 @@ export default function Rooms({ rooms }: any) {
           return (
             <div
               key={room.id}
-              className="bg-slate-300 rounded-lg p-4 flex flex-col gap-2"
+              className="bg-slate-300 rounded-lg p-4 flex flex-col gap-2 shadow-black shadow-lg"
             >
               <Head>
                 <title key="title">Rooms</title>

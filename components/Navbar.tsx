@@ -6,7 +6,7 @@ export default function Navbar() {
   const { data: session } = useSession();
 
   return (
-    <nav className="flex justify-between bg-black text-white h-12 items-center px-8 mb-4">
+    <nav className="flex justify-between bg-black text-white h-12 items-center px-8">
       <Link href="/">Logos</Link>
       <div className="flex gap-4">
         {session?.user ? (

@@ -15,7 +15,10 @@ export default function AllBooking({ bookings }: { bookings: ShowBooking[] }) {
       </Head>
       {bookings.map(booking => {
         return (
-          <div key={booking.id} className="bg-gray-400 p-2 rounded-md">
+          <div
+            key={booking.id}
+            className="bg-gray-400 p-2 rounded-md shadow-sm shadow-black"
+          >
             <div>Customer name: {booking.customer_name}</div>
             <div>Room name: {booking.room.name}</div>
             <div>Total cost: ${booking.total_cost}</div>

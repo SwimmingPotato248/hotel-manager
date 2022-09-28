@@ -11,12 +11,12 @@ const Home: NextPage = () => {
       <div>Homepage</div>
       <div className="flex gap-4">
         <Link href="/rooms">
-          <button className="h-60 w-60 p-8 bg-neutral-400 rounded-2xl">
+          <button className="h-60 w-60 p-8 bg-neutral-400 rounded-2xl shadow-lg shadow-black focus:shadow-sm">
             See all rooms
           </button>
         </Link>
         <Link href="/bookings/all">
-          <button className="h-60 w-60 p-8 bg-neutral-400 rounded-2xl">
+          <button className="h-60 w-60 p-8 bg-neutral-400 rounded-2xl shadow-lg shadow-black focus:shadow-sm">
             See all bookings
           </button>
         </Link>
