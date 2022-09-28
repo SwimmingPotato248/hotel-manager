@@ -27,9 +27,7 @@ export default function Rooms({ rooms }: any) {
               <div>Price: {room.price}</div>
               <div>Status: {room.status}</div>
               {room.status === "AVAILABLE" && (
-                <Link
-                  href={`/bookings?roomId=${room.id}&roomName=${room.name}`}
-                >
+                <Link href={`/bookings?roomId=${room.id}`}>
                   <div className="bg-blue-400 text-center rounded-md cursor-pointer">
                     Book this room
                   </div>
@@ -49,7 +47,7 @@ export default function Rooms({ rooms }: any) {
 }
 
 export const getServerSideProps: GetServerSideProps = async () => {
-  const rooms = await prisma.room.findMany({});
+  const rooms = await prisma.room.findMany({ orderBy: { id: "asc" } });
   return {
     props: {
       rooms,
