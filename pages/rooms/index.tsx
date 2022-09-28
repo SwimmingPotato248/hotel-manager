@@ -1,4 +1,5 @@
 import { GetServerSideProps } from "next";
+import Head from "next/head";
 import Link from "next/link";
 import React from "react";
 import prisma from "../../lib/prisma";
@@ -19,6 +20,9 @@ export default function Rooms({ rooms }: any) {
               key={room.id}
               className="bg-slate-300 rounded-lg p-4 flex flex-col gap-2"
             >
+              <Head>
+                <title key="title">Rooms</title>
+              </Head>
               <div>Room name: {room.name}</div>
               <div>Price: {room.price}</div>
               <div>Status: {room.status}</div>

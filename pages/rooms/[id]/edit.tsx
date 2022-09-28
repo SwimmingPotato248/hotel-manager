@@ -1,23 +1,14 @@
-import { GetServerSideProps, NextPage } from "next";
+import { GetServerSideProps } from "next";
 import prisma from "../../../lib/prisma";
-import { Status } from "@prisma/client";
+import { Status, Room } from "@prisma/client";
+import Head from "next/head";
 
-type Room = {
-  room: {
-    id: number;
-    name: string;
-    price: number;
-    status: string;
-  };
-};
-
-const EditRoom: NextPage<Room> = ({ room }) => {
-  function enumKeys<E>(e: E): (keyof E)[] {
-    return Object.keys(e) as (keyof E)[];
-  }
-
+const EditRoom = ({ room }: { room: Room }) => {
   return (
     <>
+      <Head>
+        <title key="title">Edit room {room.name}</title>
+      </Head>
       <form
         className="flex flex-col gap-2 mx-auto max-w-xl"
         method="POST"
@@ -27,7 +18,7 @@ const EditRoom: NextPage<Room> = ({ room }) => {
         <input type="text" name="name" defaultValue={room.name} />
         <input type="number" name="price" defaultValue={room.price} />
         <select name="status">
-          {enumKeys(Status).map(status => {
+          {Object.keys(Status).map(status => {
             return (
               <option key={status} value={status}>
                 {status}
@@ -67,7 +58,7 @@ export const getServerSideProps: GetServerSideProps = async ({ params }) => {
     };
   }
   const { id } = params;
-  if (!id) return { notFound: true };
+  if (typeof id !== "string") return { notFound: true };
   const room = await prisma.room.findUnique({
     where: {
       id: parseInt(id),

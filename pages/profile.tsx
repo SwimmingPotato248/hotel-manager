@@ -1,5 +1,6 @@
 import { GetServerSideProps } from "next";
 import { unstable_getServerSession } from "next-auth";
+import Head from "next/head";
 import React from "react";
 import prisma from "../lib/prisma";
 import { authOptions } from "./api/auth/[...nextauth]";
@@ -21,6 +22,9 @@ interface Props {
 export default function Profile({ user }: Props) {
   return (
     <div className="mx-auto max-w-2xl flex flex-col gap-2">
+      <Head>
+        <title key="title">Profile</title>
+      </Head>
       <div>Profile {user.username}</div>
       <div>Name: {user.profile.name}</div>
       <div>DOB: {new Date(user.profile.dob).toLocaleDateString()}</div>

@@ -3,6 +3,7 @@ import { SessionProvider } from "next-auth/react";
 import type { AppProps } from "next/app";
 import { Session } from "next-auth";
 import Layout from "../components/Layout";
+import Head from "next/head";
 
 function MyApp({
   Component,
@@ -11,6 +12,12 @@ function MyApp({
   return (
     <SessionProvider session={session}>
       <Layout>
+        <Head>
+          <meta
+            name="viewport"
+            content="initial-scale=1.0, width=device-width"
+          />
+        </Head>
         <Component {...pageProps} />
       </Layout>
     </SessionProvider>

@@ -1,4 +1,5 @@
 import { useSession } from "next-auth/react";
+import Head from "next/head";
 import { useRouter } from "next/router";
 import { useRef, useState } from "react";
 
@@ -17,6 +18,9 @@ export default function Booking() {
       method="POST"
       action="/api/bookings/create"
     >
+      <Head>
+        <title key="title">Book room</title>
+      </Head>
       <h1>Booking for room {roomName}</h1>
       <input type="hidden" name="roomId" value={roomId} />
       <input type="hidden" name="username" value={session?.user?.name || ""} />

@@ -1,6 +1,7 @@
 import { GetServerSideProps } from "next";
 import prisma from "../../lib/prisma";
 import { Booking, Room } from "@prisma/client";
+import Head from "next/head";
 
 type ShowBooking = Booking & {
   room: Room;
@@ -9,6 +10,9 @@ type ShowBooking = Booking & {
 export default function AllBooking({ bookings }: { bookings: ShowBooking[] }) {
   return (
     <div className="grid grid-cols-2 max-w-2xl mx-auto gap-2">
+      <Head>
+        <title key="title">All bookings</title>
+      </Head>
       {bookings.map(booking => {
         return (
           <div key={booking.id} className="bg-gray-400 p-2 rounded-md">

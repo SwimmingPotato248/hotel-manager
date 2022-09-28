@@ -1,9 +1,13 @@
 import type { NextPage } from "next";
+import Head from "next/head";
 import Link from "next/link";
 
 const Home: NextPage = () => {
   return (
     <div className="flex flex-col justify-center items-center gap-4">
+      <Head>
+        <title key="title">Homepage</title>
+      </Head>
       <div>Homepage</div>
       <div className="flex gap-4">
         <Link href="/rooms">

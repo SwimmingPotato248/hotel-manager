@@ -1,4 +1,5 @@
 import axios from "axios";
+import Head from "next/head";
 import { useRouter } from "next/router";
 import React from "react";
 import { useForm } from "react-hook-form";
@@ -29,6 +30,9 @@ export default function CreateRoom() {
       className="flex flex-col max-w-xl mx-auto gap-2"
       onSubmit={handleSubmit(onSubmit)}
     >
+      <Head>
+        <title key="title">Add room</title>
+      </Head>
       <input
         type="text"
         placeholder="Room name"

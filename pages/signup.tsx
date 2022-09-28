@@ -4,6 +4,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
 import axios from "axios";
 import { signIn } from "next-auth/react";
+import Head from "next/head";
 
 const schema = z.object({
   username: z
@@ -43,6 +44,9 @@ export default function SignUp() {
 
   return (
     <>
+      <Head>
+        <title key="title">Sign Up</title>
+      </Head>
       <form
         onSubmit={handleSubmit(onSubmit)}
         className="flex flex-col gap-2 max-w-xl mx-auto"
