@@ -8,13 +8,12 @@ export default async function handler(
 ) {
   if (req.method !== "POST")
     res.status(405).json({ message: "Method not allowed" });
-  const { roomId, username, customer_name, start_date, end_date, cost } =
+  const { roomId, username, customer_name, end_date, cost } =
     req.body;
   try {
     await prisma.booking.create({
       data: {
         customer_name,
-        start_date: new Date(start_date),
         end_date: new Date(end_date),
         total_cost: parseInt(cost),
         room: { connect: { id: parseInt(roomId) } },

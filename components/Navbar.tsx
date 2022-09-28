@@ -17,7 +17,9 @@ export default function Navbar() {
         ) : (
           <>
             <Link href="/signup">Sign Up</Link>
-            <button onClick={() => signIn()}>Sign In</button>
+            <button onClick={() => signIn(undefined, { callbackUrl: "/" })}>
+              Sign In
+            </button>
           </>
         )}
       </div>

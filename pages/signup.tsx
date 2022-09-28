@@ -36,7 +36,7 @@ export default function SignUp() {
   async function onSubmit(data: any) {
     try {
       await axios.post("api/users/create", data);
-      signIn();
+      signIn(undefined, { callbackUrl: "/" });
     } catch (e) {
       console.log(e);
     }
