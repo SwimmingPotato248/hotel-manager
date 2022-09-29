@@ -85,7 +85,11 @@ export default function SignUp() {
         {errors.address?.message && <p>{errors.address.message.toString()}</p>}
         <input type="email" {...register("email")} placeholder="Email" />
         {errors.email?.message && <p>{errors.email.message.toString()}</p>}
-        <input type="submit" value="Sign Up" />
+        <input
+          type="submit"
+          value="Sign Up"
+          className="bg-blue-400 shadow-black shadow-md py-2 cursor-pointer rounded-lg"
+        />
       </form>
     </>
   );
