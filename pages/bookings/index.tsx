@@ -18,7 +18,7 @@ export default function Booking({ room }: { room: Room }) {
       <Head>
         <title key="title">Book room</title>
       </Head>
-      <h1>Booking for room {room.name}</h1>
+      <h1>Check-in for room {room.name}</h1>
       <input type="hidden" name="roomId" value={room.id} />
       <input type="hidden" name="username" value={session?.user?.name || ""} />
       <label htmlFor="customer">Customer Name</label>
