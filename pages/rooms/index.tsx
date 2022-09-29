@@ -10,21 +10,23 @@ export default function Rooms({ rooms }: { rooms: Room[] }) {
   const [filtered, setFiltered] = useState(false);
   return (
     <div className="mx-auto max-w-2xl flex flex-col justify-center gap-2">
-      <div className="text-center">Rooms</div>
+      <div className="text-center text-5xl text-rose-600">Rooms</div>
       <Link href="/rooms/create">
         <button className="w-full bg-blue-500 my-4 py-2 rounded-xl shadow-md shadow-black focus:shadow-sm">
           Add new room
         </button>
       </Link>
       <div className="mx-auto">
-        <Switch
-          onChange={e => {
-            setFiltered(e.target.checked);
-          }}
-        />{" "}
-        Toggle available
+        <label>
+          <Switch
+            onChange={e => {
+              setFiltered(e.target.checked);
+            }}
+          />{" "}
+          Toggle available
+        </label>
       </div>
-      <div className="grid grid-cols-2 gap-2">
+      <div className="grid grid-cols-2 gap-4">
         {rooms
           .filter(room => (filtered ? room.status === Status.AVAILABLE : true))
           .map((room: any) => {
@@ -60,7 +62,7 @@ export default function Rooms({ rooms }: { rooms: Room[] }) {
 }
 
 export const getServerSideProps: GetServerSideProps = async () => {
-  const rooms = await prisma.room.findMany({ orderBy: { id: "asc" } });
+  const rooms = await prisma.room.findMany({ orderBy: { id: "desc" } });
   return {
     props: {
       rooms,

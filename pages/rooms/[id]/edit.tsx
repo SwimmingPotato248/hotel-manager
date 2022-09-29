@@ -15,8 +15,8 @@ const EditRoom = ({ room }: { room: Room }) => {
         action="/api/rooms/edit"
       >
         <input type="hidden" name="id" value={room.id} />
-        <input type="text" name="name" defaultValue={room.name} />
-        <input type="number" name="price" defaultValue={room.price} />
+        <input type="text" name="name" defaultValue={room.name} required />
+        <input type="number" name="price" defaultValue={room.price} required />
         <select name="status">
           {Object.keys(Status).map(status => {
             return (

@@ -1,10 +1,12 @@
 import axios from "axios";
 import Head from "next/head";
 import { useRouter } from "next/router";
-import React from "react";
+import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 
 export default function CreateRoom() {
+  const [submitting, isSubmitting] = useState(false);
+
   const {
     register,
     handleSubmit,
@@ -13,7 +15,7 @@ export default function CreateRoom() {
   const router = useRouter();
 
   async function onSubmit(data: any) {
-    console.log(data);
+    isSubmitting(true);
     try {
       const res = await axios.post(
         `${window.location.origin}/api/rooms/create`,
@@ -50,7 +52,8 @@ export default function CreateRoom() {
       <input
         type="submit"
         value="Submit"
-        className="bg-blue-400 rounded-lg py-2 cursor-pointer"
+        className="bg-blue-400 rounded-lg py-2 cursor-pointer disabled:bg-gray-400"
+        disabled={submitting}
       />
     </form>
   );
