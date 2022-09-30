@@ -59,7 +59,7 @@ export default function Rooms(props: { rooms: Room[] }) {
                   <title key="title">Rooms</title>
                 </Head>
                 <div>Room name: {room.name}</div>
-                <div>Price: {room.price}</div>
+                <div>Price: ${room.price}</div>
                 <div>Status: {room.status}</div>
                 {room.status === Status.AVAILABLE && (
                   <Link href={`/bookings?roomId=${room.id}`}>

@@ -12,7 +12,9 @@ export default function Navbar() {
         {session?.user ? (
           <>
             <Link href="/profile">{session.user.name}</Link>
-            <button onClick={() => signOut()}>Sign Out</button>
+            <button onClick={() => signOut({ callbackUrl: "/" })}>
+              Sign Out
+            </button>
           </>
         ) : (
           <>
