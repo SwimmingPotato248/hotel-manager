@@ -4,10 +4,30 @@ import { GetServerSideProps } from "next";
 import Head from "next/head";
 import Link from "next/link";
 import React, { useState } from "react";
-import prisma from "../../lib/prisma";
+import prisma from "@/lib/prisma";
+import axios from "axios";
 
-export default function Rooms({ rooms }: { rooms: Room[] }) {
+export default function Rooms(props: { rooms: Room[] }) {
+  const [rooms, setRooms] = useState(props.rooms);
   const [filtered, setFiltered] = useState(false);
+
+  async function handleCheckout(id: number) {
+    const room = rooms.find(room => room.id === id);
+    try {
+      await axios.post("/api/rooms/edit", {
+        ...room,
+        status: Status.AVAILABLE,
+      });
+      setRooms(
+        rooms.map(room => {
+          if (room.id === id) return { ...room, status: Status.AVAILABLE };
+          return room;
+        })
+      );
+    } catch (e) {
+      console.log(e);
+    }
+  }
   return (
     <div className="mx-auto max-w-2xl flex flex-col justify-center gap-2">
       <div className="text-center text-5xl text-rose-600">Rooms</div>
@@ -29,7 +49,7 @@ export default function Rooms({ rooms }: { rooms: Room[] }) {
       <div className="grid grid-cols-2 gap-4">
         {rooms
           .filter(room => (filtered ? room.status === Status.AVAILABLE : true))
-          .map((room: any) => {
+          .map(room => {
             return (
               <div
                 key={room.id}
@@ -41,12 +61,20 @@ export default function Rooms({ rooms }: { rooms: Room[] }) {
                 <div>Room name: {room.name}</div>
                 <div>Price: {room.price}</div>
                 <div>Status: {room.status}</div>
-                {room.status === "AVAILABLE" && (
+                {room.status === Status.AVAILABLE && (
                   <Link href={`/bookings?roomId=${room.id}`}>
                     <div className="bg-blue-400 text-center rounded-md cursor-pointer">
                       Check-in this room
                     </div>
                   </Link>
+                )}
+                {room.status === Status.NOT_AVAILABLE && (
+                  <button
+                    className="bg-blue-400 text-center rounded-md cursor-pointer"
+                    onClick={() => handleCheckout(room.id)}
+                  >
+                    Check out this room
+                  </button>
                 )}
                 <Link href={`/rooms/${room.id}/edit`}>
                   <div className="bg-blue-400 text-center rounded-md cursor-pointer">

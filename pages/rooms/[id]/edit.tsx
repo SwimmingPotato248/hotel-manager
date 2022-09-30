@@ -1,5 +1,5 @@
 import { GetServerSideProps } from "next";
-import prisma from "../../../lib/prisma";
+import prisma from "@/lib/prisma";
 import { Status, Room } from "@prisma/client";
 import Head from "next/head";
 

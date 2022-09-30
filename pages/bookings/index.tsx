@@ -18,7 +18,7 @@ export default function Booking({ room }: { room: Room }) {
       <Head>
         <title key="title">Book room</title>
       </Head>
-      <h1>Check-in for room {room.name}</h1>
+      <h1 className="font-bold text-lg">Check-in for room {room.name}</h1>
       <input type="hidden" name="roomId" value={room.id} />
       <input type="hidden" name="username" value={session?.user?.name || ""} />
       <label htmlFor="customer">Customer Name</label>
@@ -60,7 +60,11 @@ export default function Booking({ room }: { room: Room }) {
         name="cost"
         value={cost}
       />
-      <input type="submit" value="Book" />
+      <input
+        type="submit"
+        value="Book"
+        className="bg-blue-400 py-2 rounded-lg mt-2"
+      />
     </form>
   );
 }
